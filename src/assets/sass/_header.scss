@@ -1,0 +1,21 @@
+.header {
+  background: $color-grey-dark;
+  padding: 1rem 0;
+
+  .menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    &-link {
+      color: rgba($color-white, 0.6);
+      padding-right: 0.5rem;
+      padding-left: 0.5rem;
+
+      &.active {
+        color: $color-white;
+      }
+    }
+  }
+}

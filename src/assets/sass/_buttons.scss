@@ -1,0 +1,23 @@
+.btn {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.25;
+  padding: 0.625rem 1.25rem;
+
+  &-primary {
+    background-color: $color-grey-dark;
+    border-color: $color-grey-light;
+    color: $color-white;
+  }
+
+  &-secondary {
+    background-color: lighten($color-grey, 50%);
+    border-color: $color-grey-dark;
+    color: $color-grey-dark;
+  }
+}
