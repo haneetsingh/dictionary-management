@@ -24,6 +24,5 @@ export default function validateDictionary(items) {
     });
   });
 
-  // Set items with problems
-  localStorage.setItem('dictionary', JSON.stringify(items));
+  return items;
 }

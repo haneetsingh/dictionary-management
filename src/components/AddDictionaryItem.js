@@ -1,27 +1,30 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import useForm from '../hooks/useForm';
 import validateInput from '../helpers/validateInput';
 
-const INITIAL_STATE = {
-  domain: '',
-  range: ''
-}
 
-const AddDictionaryItem = () => {
+const AddDictionaryItem = (props) => {
+  const { dictionaryId } = props.match.params;
+  const initialState = {
+    id: null,
+    domain: '',
+    range: '',
+    dictionary: dictionaryId
+  }
+
   const {
-    alert,
     values,
     errors,
     isSubmitting,
     handleBlur,
     handleChange,    
     handleSubmit
-  } = useForm(INITIAL_STATE, validateInput);
+  } = useForm(initialState, validateInput);
 
   return (
-    <>
-      <h2 className="text-center">Add new dictionary item</h2>
-      { alert && <div className="alert alert-success">{alert}</div> }
+    <div className="container">
+      <h1 className="page-heading">Add new item</h1>
       <form id="add-item" onSubmit={handleSubmit}>
         <div className="form-field">
           <label htmlFor="domain">Domain</label>
@@ -58,8 +61,9 @@ const AddDictionaryItem = () => {
         >
           Add
         </button>
+        <Link to={`/dictionary/${dictionaryId}`} >Cancel</Link>
       </form>
-    </>
+    </div>
   );
 }
 

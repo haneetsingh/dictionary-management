@@ -1,12 +1,12 @@
+// custom hook for managing dictionary entries in localstorage
 import { useState, useEffect } from 'react';
-import useDictionaries from './useDictionaries';
+import validateDictionary from '../helpers/validateDictionary';
 
 const getAllItems = () => {
   return JSON.parse(localStorage.getItem('dictionaryItems')) || [];
 }
 
 const useItems = (dictionaryId) => {
-  const { dictionaries } = useDictionaries();
   const [items, setItems] = useState(() => getAllItems());
 
   const [dictionaryItems, setDictionaryItems] = useState([]);
@@ -29,7 +29,19 @@ const useItems = (dictionaryId) => {
     updateItems(newItems);
   }
 
-  return { items, dictionaryItems, addItem, updateItems, removeItem };
+  const validateItems = (itemsToValidate) => {
+    validateDictionary(itemsToValidate);
+    updateItems(items);
+  }
+
+  return {
+    items,
+    dictionaryItems,
+    addItem,
+    updateItems,
+    removeItem,
+    validateItems
+  };
 }
 
 export default useItems;

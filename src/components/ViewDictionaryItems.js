@@ -1,26 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import useModal from '../hooks/useModal';
 import validateDictionary from '../helpers/validateDictionary';
 
-const ViewAllItems = () => {
-  const [data, setData] = useState([]);
+import Modal from './Modal';
+import DeleteConfirmation from './DeleteConfirmation';
+
+const ViewDictionaryItems = ({ items, onDelete, validate }) => {
+  const [data, setData] = useState(items);
+  const [id, setId] = useState(null)
+  const { isShowing, showModal, hideModal } = useModal();
 
   useEffect(() => {
-    const items = JSON.parse(localStorage.getItem('dictionary')) || [];
-    validateDictionary(items);
     setData(items);
-  }, []);
+    validate(items);
+  }, [items]);
 
   const handleDelete = id => {
-    const newItems = data.filter(item => item !== data[id]);
-    validateDictionary(newItems);
-    setData(newItems);
+    setId(id);
+    showModal();
   }
 
   return (
     <>
-      <h1 className="page-heading text-center">All Dictionary Items</h1>
       <section>
+        <h2>Dictionary Items</h2>
         { data.length > 0 ?
             <>
               <table>
@@ -34,18 +38,18 @@ const ViewAllItems = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  { data.map((item, idx) => (
+                  { data.map(item => (
                     <tr
-                      key={`${idx}_${new Date().getTime()}`}
+                      key={item.id}
                       className={ item.problem && item.problem.toLowerCase() }
                     >
                       <td data-label="Domain">{item.domain}</td>
                       <td data-label="Range">{item.range}</td>
                       <td data-label="Edit">
-                        <Link to={`/edit/${idx}`}>Edit</Link>
+                        <Link to={`/item/${item.id}/edit`}>Edit</Link>
                       </td>
                       <td data-label="Delete">
-                        <a onClick={() => handleDelete(idx)}>Delete</a>
+                        <a onClick={() => handleDelete(item.id)}>Delete</a>
                       </td>
                       <td data-label="Markers">
                         { item.problem && item.problem }
@@ -59,8 +63,19 @@ const ViewAllItems = () => {
             <p>No items to display.</p>
         }
       </section>
+
+      <Modal
+        isShowing={isShowing}
+        onClose={hideModal}
+        title="Delete item"
+        text="Are you sure you want to delete this item form dictionary."
+        id={id}
+        deleteItem={onDelete}
+        closeSelf={true}
+        component={DeleteConfirmation}
+      />
     </>
   );
 }
 
-export default ViewAllItems;
+export default ViewDictionaryItems;

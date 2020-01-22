@@ -1,31 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useForm from '../hooks/useForm';
+import useItems from '../hooks/useItems';
 import validateInput from '../helpers/validateInput';
 
 const EditDictionaryItem = (props) => {
-  const { id } = props.match.params;
-  const items = JSON.parse(localStorage.getItem('dictionary'));
+  const { itemId } = props.match.params;
+  const items = JSON.parse(localStorage.getItem('dictionaryItems'));
+  const item = items.filter(item => item.id == itemId);
   const data = {
-    domain: items[id]['domain'],
-    range: items[id]['range'],
-    problems: items[id]['problems']
+    domain: item[0]['domain'],
+    range: item[0]['range'],
+    dictionary: item[0]['dictionary'],
+    problems: item[0]['problems']
   }
 
   const {
-    alert,
     values,
     errors,
     isSubmitting,
     handleBlur,
     handleChange,    
     handleSubmit
-  } = useForm(data, validateInput, id);
+  } = useForm(data, validateInput, itemId);
 
   return (
-    <>
-      <h1>Edit Item {id}</h1>
-      { alert && <div className="alert alert-success">{alert}</div> }
+    <div className="container">
+      <h1 className="page-heading">Edit item</h1>
       <form id="edit-item" onSubmit={handleSubmit}>
         <div className="form-field">
           <label htmlFor="domain">Domain</label>
@@ -62,10 +63,10 @@ const EditDictionaryItem = (props) => {
         >
           Update
         </button>
-        <Link to="/all" className="btn btn-secondary">Cancel</Link>
+        <Link to={`/dictionary/${data.dictionary}`}>Cancel</Link>
       </form>
-    </>
-  )
+    </div>
+  );
 }
 
 export default EditDictionaryItem;

@@ -1,3 +1,4 @@
+// custom hook for managing modal states
 import { useState } from 'react';
 
 const useModal = () => {

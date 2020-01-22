@@ -1,3 +1,4 @@
+// custom hook for managing dictionaries in localstor
 import { useState } from 'react';
 import { history } from '../helpers/history';
 

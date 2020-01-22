@@ -1,3 +1,4 @@
+// custom hook for Dictionary entries form validations
 import { useState, useEffect } from 'react';
 import { history } from '../helpers/history';
 import useItems from './useItems';

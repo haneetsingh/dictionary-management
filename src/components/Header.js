@@ -6,10 +6,7 @@ const Header = () => (
     <nav className="container">
       <ul className="menu">
         <li className="menu-item">
-          <NavLink exact to="/" className="menu-link">Home</NavLink>
-        </li>
-        <li className="menu-item">
-          <NavLink to="/all" className="menu-link">View All</NavLink>
+          <NavLink exact to="/" replace className="menu-link">Home</NavLink>
         </li>
       </ul>
     </nav>
