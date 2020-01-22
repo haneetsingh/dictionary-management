@@ -31,12 +31,10 @@ label {
 }
 
 .btn:not(:last-child) {
-  margin-right: 1rem;
-}
+  margin-bottom: 1rem;
+  margin-right: 0.5rem;
 
-#add-item {
   @media (min-width: 768px) {
-    margin: 0 auto;
-    width: 600px;
+    margin-right: 1rem;
   }
 }

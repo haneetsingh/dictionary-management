@@ -34,15 +34,14 @@ a {
 }
 
 .container {
-  max-width: 1170px;
-  margin: 0 auto;
-  padding: 0 15px;
+  margin: auto;
+  max-width: 900px;
+  padding: 0 1rem;
+  width: 100%;
 }
 
 .page-heading {
   color: #2d2f2f;
-  font-weight: 900;
-  margin: 0.625rem 0;
 }
 
 .page-404 {
@@ -70,4 +69,12 @@ a {
 
 .text-center {
   text-align: center;
+}
+
+h1, h2, h3 {
+  font-weight: $font-bold;
+}
+
+h4, h5, h6 {
+  font-weight: $font-regular;
 }

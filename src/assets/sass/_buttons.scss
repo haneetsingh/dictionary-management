@@ -7,7 +7,11 @@
   font-family: inherit;
   font-size: 1rem;
   line-height: 1.25;
-  padding: 0.625rem 1.25rem;
+  padding: 0.5rem 0.625rem;
+
+  @media (min-width: 768px) {
+    padding: 0.625rem 1.25rem;
+  }
 
   &-primary {
     background-color: $color-grey-dark;
@@ -19,5 +23,12 @@
     background-color: lighten($color-grey, 50%);
     border-color: $color-grey-dark;
     color: $color-grey-dark;
+  }
+
+  &-close {
+    border-width: 0;
+    height: 30px;
+    padding: 0;
+    width: 30px;
   }
 }
