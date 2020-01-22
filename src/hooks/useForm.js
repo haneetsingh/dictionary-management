@@ -1,29 +1,34 @@
 import { useState, useEffect } from 'react';
+import { history } from '../helpers/history';
+import useItems from './useItems';
 
 const useForm = (initialState, validate, updateId = null) => {
 	const [values, setValues] = useState(initialState);
 	const [errors, setErrors] = useState({});
 	const [isSubmitting, setSubmitting] = useState(false);
-	const [alert, setAlert] = useState("");
+	const { items, addItem, updateItems } = useItems(values.dictionary);
 
 	useEffect(() => {
 		if (isSubmitting) {
 			const noErrors = Object.keys(errors).length === 0;
-			const dictionaryData = JSON.parse(localStorage.getItem('dictionary')) || [];
 
 			if (noErrors) {
 				if (!updateId) {
-					dictionaryData.push(values);
-					setValues(initialState);
-					setAlert("Dictionary item added succesfully");
+					values.id = Date.now();
+					addItem(values);
 				}
 				else {
-					dictionaryData[updateId]['domain'] = values.domain;
-					dictionaryData[updateId]['range'] = values.range;
-					setAlert("Dictionary item updated succesfully");
+					const updatedItems = items.map(item => {
+						if (item.id == updateId) {
+							item['domain'] = values.domain;
+							item['range'] = values.range;
+						}
+						return item;
+					});
+					updateItems(updatedItems);
 				}
-				localStorage.setItem('dictionary', JSON.stringify(dictionaryData));
 				setSubmitting(false);
+				history.push(`/dictionary/${values.dictionary}`);
 			}
 			else {
 				setSubmitting(false);
@@ -51,7 +56,6 @@ const useForm = (initialState, validate, updateId = null) => {
 	}
 
 	return {
-		alert,
 		values,
 		errors,
 		isSubmitting,
