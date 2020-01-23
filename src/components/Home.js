@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import useModal from '../hooks/useModal';
+import useDictionaries from '../hooks/useDictionaries';
 
 import Modal from './Modal';
 import AddDictionary from './AddDictionary';
 import ViewAllDictionaries from './ViewAllDictionaries';
 
 const Home = () => {
-  const [data, setData] = useState([]);
   const { isShowing, showModal, hideModal } = useModal();
-
-  useEffect(() => {
-    const dictionaries = JSON.parse(localStorage.getItem('dictionaries')) || [];
-    setData(dictionaries);
-  }, []);
+  const { dictionaries } = useDictionaries();
 
   return (
     <div className="container">
@@ -26,7 +22,7 @@ const Home = () => {
         </button>
       </div>
 
-      <ViewAllDictionaries items={data} />
+      <ViewAllDictionaries items={dictionaries} />
 
       <Modal
         isShowing={isShowing}

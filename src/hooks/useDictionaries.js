@@ -1,4 +1,4 @@
-// custom hook for managing dictionaries in localstor
+// custom hook for managing dictionaries in localstorage
 import { useState } from 'react';
 import { history } from '../helpers/history';
 
