@@ -78,3 +78,42 @@ h1, h2, h3 {
 h4, h5, h6 {
   font-weight: $font-regular;
 }
+
+.label {
+  font-size: $font-medium;
+  font-weight: $font-bold;
+  margin: 0.625rem 0;
+}
+
+.inline-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+
+  &--item {
+    margin-right: 1rem;
+
+    &::before {
+      content: '';
+      margin-right: 0.5rem;
+      padding: 0 1.25rem;
+    }
+
+    &-cycle::before {
+      background-color: $color-red;
+    }
+
+    &-chain::before {
+      background-color: $color-orange;
+    }
+
+    &-duplicate::before {
+      background-color: $color-yellow;
+    }
+
+    &-fork::before {
+      background-color: $color-purple;
+    }
+  }
+}

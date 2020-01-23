@@ -7,6 +7,7 @@ import useDictionaries from '../hooks/useDictionaries';
 import Modal from './Modal';
 import DeleteConfirmation from './DeleteConfirmation';
 import ViewDictionaryItems from './ViewDictionaryItems';
+import MarkerKey from './MarkerKey';
 
 const DictionaryItem = (props) => {
   const { dictionaryId } = props.match.params;
@@ -38,6 +39,8 @@ const DictionaryItem = (props) => {
           Delete Dictionary
         </a>
       </div>
+
+      <MarkerKey />
 
       <ViewDictionaryItems
         items={dictionaryItems}
